@@ -1,0 +1,5 @@
+starter/data/
+*.pt
+*.pth
+*.npy
+__pycache__/
