@@ -1,0 +1,6 @@
+{
+    "epochs": 100,
+    "parameters": 3173248,
+    "training_time_seconds": 492.7087233066559,
+    "final_loss": 0.006299450956285
+}
