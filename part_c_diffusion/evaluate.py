@@ -79,18 +79,15 @@ def make_eval_sheet(unet, class_names, seed=123):
 
 
 def score_eval(csv_path="results/human_eval.csv"):
-    with open("results/KEY_do_not_open.json") as f:
-        key = json.load(f)
-
+    key = json.load(open("results/KEY_do_not_open.json"))
     df = pd.read_csv(csv_path)
-    df["true"] = [key["class_names"][i] for i in key["true_labels"]]
+    df["true"] = [str(key["class_names"][i]) for i in key["true_labels"]]
 
-    acc1 = (df["member1"] == df["true"]).mean()
-    acc2 = (df["member2"] == df["true"]).mean()
-    agreement = (df["member1"] == df["member2"]).mean()
+    for col in ["member1", "member2"]:
+        df[col] = df[col].astype(str).str.strip()
 
-    print(f"Member 1: {acc1:.2%}")
-    print(f"Member 2: {acc2:.2%}")
-    print(f"Agreement: {agreement:.2%}")
-
+    a1 = (df["member1"] == df["true"]).mean()
+    a2 = (df["member2"] == df["true"]).mean()
+    agree = (df["member1"] == df["member2"]).mean()
+    print(f"Member 1: {a1:.2%} | Member 2: {a2:.2%} | Agreement: {agree:.2%}")
     df.to_csv(csv_path, index=False)
