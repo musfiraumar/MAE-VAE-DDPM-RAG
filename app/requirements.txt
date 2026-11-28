@@ -1,0 +1,8 @@
+gradio
+torch
+transformers
+datasets
+diffusers
+huggingface_hub
+numpy
+pillow
